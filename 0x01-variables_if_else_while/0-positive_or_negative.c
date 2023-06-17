@@ -9,21 +9,21 @@
  */
 int main(void)
 {
-	int p;
+	int n;
 
 	srand(time(0));
-	p = rand() - RAND_MAX / 2;
-	if (p > 0)
+	n = rand() - RAND_MAX / 2;
+	if (n > 0)
 	{
-		printf("%d is positive\n", p);
+		printf("%d is positive\n", n);
 	}
-	else if (p == 0)
+	else if (n == 0)
 	{
-		printf("%d is zero\n", p);
+		printf("%d is zero\n", n);
 	}
 	else
 	{
-		printf("%d is negative\n", p);
+		printf("%d is negative\n", n);
 	}
 	return (0);
 }
