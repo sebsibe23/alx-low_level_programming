@@ -1,33 +1,33 @@
 #include <stdio.h>
 
 /**
- * main - prints every three-digit combination that is possible.
- * Return: Always 0 (Success)
+ * main - prints all possible two-digit number combinations
+ * Return: 0 (Success)
  */
 int main(void)
 {
-    int q, d, z;
+	int i, h;
 
-        for (q = 48; q < 58; q++)
-        {
-                for (d = 49; d < 58; d++)
-                {
-                        for (z = 50; z < 58; z++)
-                        {
-                                if (z > d && d > q)
-                                {
-                                        putchar(q);
-                                        putchar(d);
-                                        putchar(z);
-                                        if (q != 55 || d != 56)
-                                        {
-                                                putchar(',');
-                                                putchar(' ');
-                                        }
-                                }
-                        }
-                }
-        }
-        putchar('\n');
-        return (0);
+	for (i = 0; i < 100; i++)
+	{
+		for (h = 0; h < 100; h++)
+		{
+			if (i < h)
+			{
+				putchar((i / 10) + 48);
+				putchar((i % 10) + 48);
+				putchar(' ');
+				putchar((h / 10) + 48);
+				putchar((h % 10) + 48);
+				if (i != 98 || h != 99)
+				{
+					putchar(',');
+					putchar(' ');
+				}
+			}
+
+		}
+	}
+	putchar('\n');
+	return (0);
 }
