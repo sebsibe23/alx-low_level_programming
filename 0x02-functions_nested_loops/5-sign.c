@@ -15,7 +15,7 @@ int print_sign(int h)
 		return (1);
 	} 
 	else if (h == 0)
-    {
+        {
 		_putchar(48);
 		return (0);
 	} 
