@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * _isalpha - checks for alphabetic character
- * @c: the character to be checked
- * Return: 1 if c is a letter, 0 otherwise
+ * _isalpha - checks for the presence of an alphabetic character
+ * @d: the character to be examined
+ * Return: 1 if d is a letter, 0 otherwise
  */
-int _isalpha(int c)
+int _isalpha(int d)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
+        return ((d >= 'a' && d <= 'z') || (d >= 'A' &&d <= 'Z'));
 }
