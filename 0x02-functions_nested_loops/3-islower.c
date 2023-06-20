@@ -1,16 +1,15 @@
 #include "main.h"
 
 /**
- * 
-_islowerNew String = #include "main.h" - check to see if the character is lowercase
- * @q: the char needs to be verified
- * Return:If q is lowercase, return 1; otherwise, return 0.
+ * _islower - verify that char is lowercase.
+ * @f: the char needs to be verified
+ * Return: 1 if char is lowercase, otherwise 0.
  */
 
-int _islower(int q)
+int _islower(int f)
 {
-        if (q >= 'a' && q <= 'z')
-                return (1);
-        else
-                return (0);
+	if (f >= 'a' && f <= 'z')
+		return (1);
+	else
+		return (0);
 }
