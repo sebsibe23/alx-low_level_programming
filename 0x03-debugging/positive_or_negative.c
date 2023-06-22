@@ -1,8 +1,8 @@
 #include "main.h"
 /**
  *positive_or_negative - return the number is +iv or -iv
- *
- * Return: Always 0 (Success)
+ *@j:number to be checked
+ *Return: Alwaypositive_or_negatives 0 (Success)
  */
 void positive_or_negative(int j)
 {
