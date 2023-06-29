@@ -2,7 +2,7 @@
 #define MAIN_H
 
 int _putchar(char c);
-char *_strcat(char *de_st, char *sr_c);
+char *_strcat(char *dest, char *src);
 char *_strncat(char *de_st, char *sr_c, int m);
 char *_strncpy(char *de_st, char *sr_c, int m);
 int _strcmp(char *s1, char *s2);
