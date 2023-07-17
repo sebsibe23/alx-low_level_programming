@@ -13,7 +13,7 @@ int main(void)
 	float r;
 
 	r = 98;
-	a = StrPI * r * r;
+	a = PI * r * r;
 	printf("%.3f\n", a);
 	return (0);
 }
