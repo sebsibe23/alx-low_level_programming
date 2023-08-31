@@ -13,20 +13,27 @@
  */
 unsigned int binary_to_uint(const char *b)
 {
-	unsigned int val_int = 0;
-	int e = 0;
+	unsigned int finalres = 0;
+	int intial = 1, r = 0;
 
 	if (b == NULL)
-	{
 		return (0);
-	}
 
-	while (b[e] == '0' || b[e] == '1')
+	while (b[r + 1])
 	{
-		val_int <<= 1;
-		val_int += b[e] - '0';
-		e++;
+		if (b[r] != '0' && b[r] != '1')
+			return (0);
+		r++;
 	}
 
-	return (val_int);
+	while (r >= 0)
+	{
+		finalres += ((b[r] - '0') * intial);
+		intial *= 2;
+		r--;
+	}
+
+
+	return (finalres);
+
 }
