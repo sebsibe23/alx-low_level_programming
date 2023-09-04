@@ -7,42 +7,43 @@ void close_file(int fd);
 
 /**
  * create_buffer - a function Allocates 1024 bytes for a buffer.
- * @file: a name of the file buffer is storing chars.
+ * @file: a name of the file chbuffer is storing chars.
  *
- * Return: return the pointer to the newly-allocated buffer.
+ * Return: return the pointer to the newly-allocated chbuffer.
  */
 char *create_buffer(char *file)
 {
-	char *buf;
-	size_t buf_size = 1024;
+	char *chbuffer;
 
-	buf = malloc(sizeof(char) * buf_size);
+	chbuffer = malloc(sizeof(char) * 1024);
 
-	if (buf == NULL)
+	if (chbuffer == NULL)
 	{
 		dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", file);
 		exit(99);
 	}
 
-	return (buf);
+	return (chbuffer);
 }
+
 /**
  * close_file - func used to Closes file descriptors.
  * @fd: a file descriptor to be closed.
  */
 void close_file(int fd)
 {
-	int result_int;
+	int o;
 
-	result_int = close(fd);
+	o = close(fd);
 
-	if (result_int == -1)
+	if (o == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
 }
+
 /**
  * main - function Copies the contents of a file to another file.
  * @argc: a No of arguments supplied to the program.
@@ -57,39 +58,43 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int fromint_, to_int, q, b;
-	char *buff_ch;
+	int from_int, var_int_to, d, q;
+	char *buffer_ch;
 
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	buff_ch = create_buffer(argv[2]);
-	fromint_ = open(argv[1], O_RDONLY);
-	q = read(fromint_, buff_ch, 1024);
-	to_int = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	buffer_ch = create_buffer(argv[2]);
+	from_int = open(argv[1], O_RDONLY);
+	d = read(from_int, buffer_ch, 1024);
+	var_int_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+
 	do {
-		if (fromint_ == -1 || q == -1)
+		if (from_int == -1 || d == -1)
 		{
 			dprintf(STDERR_FILENO,
-					"Error: Can't read fromint_ file %s\n", argv[1]);
-			free(buff_ch);
+					"Error: Can't read from file %s\n", argv[1]);
+			free(buffer_ch);
 			exit(98);
 		}
-		b = write(to_int, buff_ch, q);
-		if (to_int == -1 || b == -1)
+		q = write(var_int_to, buffer_ch, d);
+		if (var_int_to == -1 || q == -1)
 		{
 			dprintf(STDERR_FILENO,
 					"Error: Can't write to %s\n", argv[2]);
-			free(buff_ch);
+			free(buffer_ch);
 			exit(99);
 		}
-		q = read(fromint_, buff_ch, 1024);
-		to_int = open(argv[2], O_WRONLY | O_APPEND);
-	} while (q > 0);
-	free(buff_ch);
-	close_file(fromint_);
-	close_file(to_int);
+
+		d = read(from_int, buffer_ch, 1024);
+		var_int_to = open(argv[2], O_WRONLY | O_APPEND);
+
+	} while (d > 0);
+
+	free(buffer_ch);
+	close_file(from_int);
+	close_file(var_int_to);
 	return (0);
 }
