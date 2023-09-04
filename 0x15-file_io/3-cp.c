@@ -1,6 +1,10 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
+
+char *create_buffer(char *file);
+void close_file(int fd);
+
 /**
  * create_buffer - a function Allocates 1024 bytes for a buffer.
  * @file: a name of the file buffer is storing chars.
@@ -9,48 +13,36 @@
  */
 char *create_buffer(char *file)
 {
-	char *buffer;
-	int size = 1024;
-	int i;
+	char *buf;
+	size_t buf_size = 1024;
 
-	buffer = malloc(sizeof(char) * size);
+	buf = malloc(sizeof(char) * buf_size);
 
-	if (buffer == NULL)
+	if (buf == NULL)
 	{
 		dprintf(STDERR_FILENO,
 				"Error: Can't write to %s\n", file);
 		exit(99);
 	}
 
-	for (i = 0; i < size; i++)
-		buffer[i] = 0;
-
-	return (buffer);
+	return (buf);
 }
-
 /**
  * close_file - func used to Closes file descriptors.
  * @fd: a file descriptor to be closed.
  */
-
 void close_file(int fd)
 {
-	int c;
-	int max_att = 3;
-	int attempt = 0;
+	int result_int;
 
-	while ((c = close(fd)) == -1 && attempt < max_att)
-	{
-		attempt++;
-	}
+	result_int = close(fd);
 
-	if (c == -1)
+	if (result_int == -1)
 	{
 		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
 }
-
 /**
  * main - function Copies the contents of a file to another file.
  * @argc: a No of arguments supplied to the program.
@@ -73,7 +65,7 @@ int main(int argc, char *argv[])
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	buff_ch = create_buffer(argv[2]);
+	buff_ch = create_buff_ch(argv[2]);
 	fromint_ = open(argv[1], O_RDONLY);
 	q = read(fromint_, buff_ch, 1024);
 	to_int = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
