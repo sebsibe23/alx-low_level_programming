@@ -65,41 +65,39 @@ void close_file(int fd)
  */
 int main(int argc, char *argv[])
 {
-	int intfrom, to_int, u, k;
-	char *buffer;
-	int buffer_size = 1024;
-	int tot_bytes_read = 0, tot_bytes_written = 0;
+	int fromint_, to_int, q, b;
+	char *buff_ch;
 
 	if (argc != 3)
 	{
 		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	buffer = create_buffer(argv[2]);
-	intfrom = open(argv[1], O_RDONLY);
+	buff_ch = create_buffer(argv[2]);
+	fromint_ = open(argv[1], O_RDONLY);
+	q = read(fromint_, buff_ch, 1024);
 	to_int = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	while ((u = read(intfrom, buffer, buffer_size)) > 0)
-	{
-		tot_bytes_read += u;
-		k = write(to_int, buffer, u);
-		if (k == -1)
+	do {
+		if (fromint_ == -1 || q == -1)
 		{
 			dprintf(STDERR_FILENO,
-					"Error: Can't write to_int %s\n", argv[2]);
-			free(buffer);
+					"Error: Can't read fromint_ file %s\n", argv[1]);
+			free(buff_ch);
+			exit(98);
+		}
+		b = write(to_int, buff_ch, q);
+		if (to_int == -1 || b == -1)
+		{
+			dprintf(STDERR_FILENO,
+					"Error: Can't write to %s\n", argv[2]);
+			free(buff_ch);
 			exit(99);
 		}
-		tot_bytes_written += k;
-	}
-	if (u == -1)
-	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't read from file %s\n", argv[1]);
-		free(buffer);
-		exit(98);
-	}
-	free(buffer);
-	close_file(intfrom);
+		q = read(fromint_, buff_ch, 1024);
+		to_int = open(argv[2], O_WRONLY | O_APPEND);
+	} while (q > 0);
+	free(buff_ch);
+	close_file(fromint_);
 	close_file(to_int);
 	return (0);
 }
