@@ -12,13 +12,13 @@
  */
 size_t dlistint_len(const dlistint_t *h)
 {
-	size_t n;
+	size_t strszn;
 
-	n = 0;
+	strszn = 0;
 	while (h != NULL)
 	{
-		n++;
+		strszn++;
 		h = h->next;
 	}
-	return (n);
+	return (strszn);
 }
