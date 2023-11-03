@@ -13,5 +13,6 @@ unsigned long int key_index(const unsigned char *key, unsigned long int size)
 {
 	const unsigned char *input_key =  key;
 	unsigned long int array_size = size;
+
 	return (hash_djb2(input_key) % array_size);
 }
