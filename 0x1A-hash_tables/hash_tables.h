@@ -50,5 +50,54 @@ void hash_table_print(const hash_table_t *ht);
 void hash_table_delete(hash_table_t *ht);
 /* Deletes the hash table. */
 
+/**
+ * Struct: shash_node_s - Represents a node in a sorted hash table.
+ *
+ * @key: A string representing the unique key in the hash table.
+ * @value: The value corresponding to the key.
+ * @next: A pointer to the next node in the hash table.
+ * @sprev: A pointer to the previous node in the sorted linked list.
+ * @snext: A pointer to the next node in the sorted linked list.
+ */
+typedef struct shash_node_s
+{
+	char *key;
+	char *value;
+	struct shash_node_s *next;
+	struct shash_node_s *sprev;
+	struct shash_node_s *snext;
+} shash_node_t;
+
+/**
+ * Struct: shash_table_s - Represents a sorted hash table.
+ *
+ * @size: The size of the array in the hash table.
+ * @array: An array of pointers, each pointing to the first 
+ * node of a linked list. This is used to handle collisions in the hash table.
+ * @shead: A pointer to the first node in the sorted linked list.
+ * @stail: A pointer to the last node in the sorted linked list.
+ *
+ * This data structure represents a sorted hash table.
+ * It includes an array for the hash table itself, where collisions are 
+ * handled by chaining (each array element points to a linked list of 
+ * nodes with the same hash value). It also includes a sorted linked list, 
+ * which allows for efficient access to elements in sorted order.
+ */
+typedef struct shash_table_s
+{
+	unsigned long int size;
+	shash_node_t **array;
+	shash_node_t *shead;
+	shash_node_t *stail;
+} shash_table_t;
+
+shash_table_t *shash_table_create(unsigned long int size);
+shash_node_t *add_n_shash(shash_node_t **, const char *, const char *);
+void add_i_shash(shash_table_t *ht, shash_node_t *new);
+int shash_table_set(shash_table_t *ht, const char *key, const char *value);
+char *shash_table_get(const shash_table_t *ht, const char *key);
+void shash_table_print(const shash_table_t *ht);
+void shash_table_print_rev(const shash_table_t *ht);
+void shash_table_delete(shash_table_t *ht);
 #endif
 
