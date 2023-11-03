@@ -95,7 +95,10 @@ void add_i_shash(shash_table_t *ht, shash_node_t *new)
 	while (tempNode1 != NULL)
 	{
 		comparisonResult = strcmp(newNode->key, tempNode1->key);
-		if (comparisonResult == 0) { return; }
+		if (comparisonResult == 0)
+		{
+			return;
+		}
 		else if (comparisonResult < 0)
 		{
 			newNode->sprev = tempNode1->sprev;
