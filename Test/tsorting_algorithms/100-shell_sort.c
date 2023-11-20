@@ -7,25 +7,27 @@
  */
 void swap_ints(int *a, int *b)
 {
-	if (a != b) 
-	{
-		*a ^= *b;
-		*b ^= *a;
-		*a ^= *b;
-	}
-}
+	int tmp;
+	int *vara = a;
+	int *varb = b;
 
+	tmp = *vara;
+	*vara = *varb;
+	*varb = tmp;
+}
 /**
- * shell_sort - Function to sort an array of integers using the Shell sort method.
+ * shell_sort - Function to sort an array of integers
+ * using the Shell sort method.
  * @array: Pointer to the array that needs to be sorted.
  * @size: The number of elements in the array.
  */
 void shell_sort(int *array, size_t size)
 {
-	size_t gap, g, k;
-	int temp1, temp2;
+	size_t gap, i, j;
+	int temp;
+	int *vararray = array;
 
-	if (array == NULL || size < 2)
+	if (vararray == NULL || size < 2)
 		return;
 
 	for (gap = 1; gap < (size / 3);)
@@ -33,21 +35,17 @@ void shell_sort(int *array, size_t size)
 
 	for (; gap >= 1; gap /= 3)
 	{
-		for (g = gap; g < size; g++)
+		for (i = gap; i < size; i++)
 		{
-			k = g;
-			temp1 = array[k];
-			temp2 = array[k - gap];
-			while (k >= gap && temp2 > temp1)
+			j = i;
+			while (j >= gap && vararray[j - gap] > vararray[j])
 			{
-				swap_ints(&temp1, &temp2);
-				array[k] = temp1;
-				array[k - gap] = temp2;
-				k -= gap;
+				temp = vararray[j];
+				vararray[j] = vararray[j - gap];
+				vararray[j - gap] = temp;
+				j -= gap;
 			}
 		}
-		print_array(array, size);
+		print_array(vararray, size);
 	}
 }
-
-

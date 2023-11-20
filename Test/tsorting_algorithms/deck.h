@@ -5,10 +5,15 @@
 
 /**
  * enum kind_e - Enumeration of card suits.
- * @SPADE: Spades suit.
- * @HEART: Hearts suit.
- * @CLUB: Clubs suit.
- * @DIAMOND: Diamonds suit.
+ * @SPADE: Represents the suit of Spades. Explicitly assigned a value of 0.
+ * @HEART: Represents the suit of Hearts. As per the C language rules,
+ * if the first enumerator has an initializer (a constant expression),
+ * the value of each subsequent enumerator is the value of the
+ * predecessor plus one. Therefore, HEART will have a value of 1.
+ * @CLUB: Represents the suit of Clubs. Following the rule above,
+ * CLUB will have a value of 2.
+ * @DIAMOND: Represents the suit of Diamonds.
+ * Following the rule above, DIAMOND will have a value of 3.
  */
 typedef enum kind_e
 {
@@ -19,11 +24,14 @@ typedef enum kind_e
 } kind_t;
 
 /**
- * struct card_s - Playing card
+ * struct card_s - Structure representing a card in a deck of cards.
  *
- * @value: Value of the card
+ * @value: A pointer to a constant character, representing the value
+ * of a card (like '2', '3', '4', ..., '10', 'J', 'Q', 'K', 'A').
+ * The data this pointer points to cannot be changed.
  * From "Ace" to "King"
- * @kind: Kind of the card
+ * @kind: An instance of the kind_t enumeration,
+ * representing the suit of the card (SPADE, HEART, CLUB, DIAMOND).
  */
 typedef struct card_s
 {
@@ -32,11 +40,18 @@ typedef struct card_s
 } card_t;
 
 /**
- * struct deck_node_s - Deck of card
+ * struct deck_node_s - Structure representing a node in
+ * a doubly linked list for a deck of cards.
  *
- * @card: Pointer to the card of the node
- * @prev: Pointer to the previous node of the list
- * @next: Pointer to the next node of the list
+ * @card: A pointer to a constant card_t type, representing
+ * a card in a deck. The data this pointer points to cannot be changed.
+ * @prev:  A pointer to the previous node in the deck, allowing the
+ * list to be traversed backwards.
+ * @next:  A pointer to the next node in the deck,
+ * allowing the list to be traversed forwards.
+ * Returns: This is a structure definition, so it does not
+ * return a value. It is used to define variables
+ * or allocate memory blocks of this type.
  */
 typedef struct deck_node_s
 {

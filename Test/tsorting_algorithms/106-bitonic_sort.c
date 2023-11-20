@@ -14,7 +14,8 @@ void bitonic_sort(int *array, size_t size);
  *              a temporary variable to hold the value of the first integer
  *              during the swap.
  *
- * Return: This function does not return a value. It modifies the input integers in-place.
+ * Return: This function does not return a value. It modifies the
+ * input integers in-place.
  */
 void swap_ints(int *a, int *b)
 {
@@ -37,9 +38,11 @@ void swap_ints(int *a, int *b)
  *              a temporary variable to hold the value of the first integer
  *              during the swap.
  *
- * Return: This function does not return a value. It modifies the input integers in-place.
+ * Return: This function does not return a value. It modifies
+ * the input integers in-place.
  */
-void bitonic_merge(int *array, size_t size, size_t start, size_t seq, char flow)
+void bitonic_merge(int *array, size_t size, size_t start, size_t seq,
+		char flow)
 {
 	size_t i;
 	size_t jump = seq / 2;
@@ -69,7 +72,8 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t seq, char flow)
  *              a recursive approach to divide the array into two halves and
  *              sort them in opposite directions, then merge them.
  *
- * Return: This function does not return a value. It modifies the input integers in-place.
+ * Return: This function does not return a value.
+ * It modifies the input integers in-place.
  */
 void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow)
 {
@@ -83,7 +87,7 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow)
 		print_array(array + start, seq);
 
 		bitonic_seq(array, size, start, cut, UP);
-		bitonic_seq(array, size, end, cut, DOWN); 
+		bitonic_seq(array, size, end, cut, DOWN);
 		bitonic_merge(array, size, start, seq, flow);
 
 		printf("Result [%lu/%lu] (%s):\n", seq, size, str);
@@ -101,12 +105,13 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow)
  *              a recursive approach to divide the array into two halves and
  *              sort them in opposite directions, then merge them.
  *
- * Return: This function does not return a value. It modifies the input integers in-place.
+ * Return: This function does not return a value.
+ * It modifies the input integers in-place.
  */
 void bitonic_sort(int *array, size_t size)
 {
-	size_t start = 0; 
-	char flow = UP; 
+	size_t start = 0;
+	char flow = UP;
 
 	if (array == NULL || size < 2)
 		return;

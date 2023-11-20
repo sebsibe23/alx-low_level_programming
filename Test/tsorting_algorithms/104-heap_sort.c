@@ -16,13 +16,13 @@ void heap_sort(int *array, size_t size);
  */
 void swap_ints(int *a, int *b)
 {
-	int *temp_a, *temp_b;
+	int tmp;
+	int *vara = a;
+	int *varb = b;
 
-	temp_a = a;
-	temp_b = b;
-
-	*temp_a = *b;
-	*temp_b = *a;
+	tmp = *vara;
+	*vara = *varb;
+	*varb = tmp;
 }
 /**
  * max_heapify - Converts a binary tree into a max heap.
@@ -45,29 +45,28 @@ void swap_ints(int *a, int *b)
  */
 void max_heapify(int *array, size_t size, size_t base, size_t root)
 {
+	int *vararray = array;
 	size_t left, right, large;
-	int *root_ptr, *large_ptr, *left_ptr, *right_ptr;
+	int temp;
 
 	left = 2 * root + 1;
 	right = 2 * root + 2;
 	large = root;
 
-	root_ptr = array + root;
-	large_ptr = array + large;
-	left_ptr = array + left;
-	right_ptr = array + right;
-
-	if (left < base && *left_ptr > *large_ptr)
-		large = left, large_ptr = left_ptr;
-	if (right < base && *right_ptr > *large_ptr)
-		large = right, large_ptr = right_ptr;
+	if (left < base && vararray[left] > vararray[large])
+		large = left;
+	if (right < base && vararray[right] > vararray[large])
+		large = right;
 
 	if (large != root)
 	{
-		swap_ints(root_ptr, large_ptr);
-		print_array(array, size);
-		max_heapify(array, size, base, large);
+		temp = vararray[root];
+		vararray[root] = vararray[large];
+		vararray[large] = temp;
+		print_array(vararray, size);
+		max_heapify(vararray, size, base, large);
 	}
+
 }
 /**
  * heap_sort - Sorts an array of integers in ascending
@@ -89,21 +88,23 @@ void max_heapify(int *array, size_t size, size_t base, size_t root)
  */
 void heap_sort(int *array, size_t size)
 {
-	int i;
-	int start = (size / 2) - 1;
-	int end = size - 1;
+	int *vararray = array;
+	int i, temp;
 
-	if (array == NULL || size < 2)
+	if (vararray == NULL || size < 2)
 		return;
 
-	for (i = start; i >= 0; i--)
-		max_heapify(array, size, size, i);
+	for (i = (size / 2) - 1; i >= 0; i--)
+		max_heapify(vararray, size, size, i);
 
-	for (i = end; i > 0; i--)
+	for (i = size - 1; i > 0; i--)
 	{
-		swap_ints(array, array + i);
-		print_array(array, size);
-		max_heapify(array, size, i, 0);
+		temp = vararray[0];
+		vararray[0] = vararray[i];
+		vararray[i] = temp;
+		print_array(vararray, size);
+		max_heapify(vararray, size, i, 0);
 	}
+
 }
 
